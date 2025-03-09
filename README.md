@@ -41,10 +41,10 @@ Cuando se cancela un plan se hace un calculo considerando la fecha actual y la f
 No se puede crear una nueva suscripción si ya tiene una activa para el mismo usuario (email)
 
 ### Capturas
-![Home](images/readme/home.png)
-![Subscription](images/readme/subscription.PNG)
-![Login](images/readme/login.PNG)
-![Subscription List](images/readme/subscription_list.PNG)
-![update](images/readme/update.PNG)
-![check](images/readme/check.PNG)
-![cancel](images/readme/cancel.PNG)
+![Home](public/images/readme/home.png)
+![Subscription](public/images/readme/subscription.PNG)
+![Login](public/images/readme/login.PNG)
+![Subscription List](public/images/readme/subscription_list.PNG)
+![update](public/images/readme/update.PNG)
+![check](public/images/readme/check.PNG)
+![cancel](public/images/readme/cancel.PNG)
