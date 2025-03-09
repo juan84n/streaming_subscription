@@ -32,7 +32,6 @@ export class ViewSubscriptionComponent implements OnInit {
   cancelSubscription(){
     if(this.subscription) {
       const cancel = confirm("Realmente quiere cancelar su plan?");
-      console.log(cancel);
       if(cancel){
         this.cancelUseCase.cancel(this.subscription);
         this.userLoggedIn.setSubscription(undefined);

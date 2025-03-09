@@ -1,14 +1,14 @@
-import { inject, Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
+import { SUBSCRIPTION_REPOSITORY } from "@subscription/config/tokens";
 import { Subscription } from "@subscription/domain/entity/subscription";
 import { SubscriptionRepository } from "@subscription/domain/repository/subscriptionRepository";
 import { FindUseCase } from "@subscription/domain/usecase/find";
-import { RepositoryInMemoryService } from "@subscription/infrastructure/repository/subscription-repository.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FindAllImplUseCase implements FindUseCase {
-  private subscriptionRepository: SubscriptionRepository = inject(RepositoryInMemoryService);
+  constructor(@Inject(SUBSCRIPTION_REPOSITORY) private subscriptionRepository: SubscriptionRepository ){}
 
   findAll(): Subscription[] {
     return this.subscriptionRepository.findAll();

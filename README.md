@@ -38,7 +38,14 @@ Cuando se hace un cambio de plan dependiendo la fecha se pone para el siguiente 
 **Cancelación**
 Cuando se cancela un plan se hace un calculo considerando la fecha actual y la fecha final del plan, se mira el valor por día y la diferencia de días si existe se da como reembolso; esto es tanto para mensuales como para anuales.
 
+**Notas**
 No se puede crear una nueva suscripción si ya tiene una activa para el mismo usuario (email)
+
+Como es una aplicación pequeña se usaron las nuevas señales que son poderosas y funcionan como obervables, de esa manera podemos cambiar la estrategia de cambio para evitar el onzone de angular y usar el push.
+
+Para desacoplar la capa de application con la de infrastructure y no inyectar la dependencia de la implementación del repositorio en los casos de uso se optó por crear una carpeta config a la par de las arquitectónicas donde se creo un token inyectable que a su vez se inicia en el componente standalone principal de la aplicación y así se puede inyectar la implementación para la abstracción del repositorio del dominio.
+
+Por el tiempo no se han implementado pruebas unitarias
 
 ### Capturas
 ![Home](public/images/readme/home.png)

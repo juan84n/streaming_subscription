@@ -1,17 +1,17 @@
-import { inject, Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
+import { SUBSCRIPTION_REPOSITORY } from "@subscription/config/tokens";
 import { Subscription } from "@subscription/domain/entity/subscription";
 import { SubscriptionRepository } from "@subscription/domain/repository/subscriptionRepository";
 import { UpdateUsecase } from "@subscription/domain/usecase/update";
-import { RepositoryInMemoryService } from "@subscription/infrastructure/repository/subscription-repository.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UpdateImplUseCase implements UpdateUsecase {
 
-  private subscribeRepository: SubscriptionRepository = inject(RepositoryInMemoryService);
+  constructor(@Inject(SUBSCRIPTION_REPOSITORY) private subscriptionRepository: SubscriptionRepository ){}
 
   update(subscription: Subscription): void {
-    this.subscribeRepository.updateSubscription(subscription);
+    this.subscriptionRepository.updateSubscription(subscription);
   }
 }

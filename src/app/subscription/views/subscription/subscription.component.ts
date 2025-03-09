@@ -54,7 +54,6 @@ export class SubscriptionComponent implements OnInit {
     this.typeIncoming = this.route.snapshot.queryParamMap.get('type') || '';
     this.title = this.periodIncoming === 1 ? 'Subscripción Mensual' : 'Subscripción Anual';
     this.form.get('type')?.setValue(this.typeIncoming);
-    console.log('los valores ', this.periodIncoming,  this.typeIncoming);
   }
 
   private emailAlreadyExist(email: string){
@@ -69,7 +68,6 @@ export class SubscriptionComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-        console.log(this.form.value);
         const name = this.form.value.name ?? '';
         const email = this.form.value.email ?? ''
         const password = this.form.value.password ?? '';

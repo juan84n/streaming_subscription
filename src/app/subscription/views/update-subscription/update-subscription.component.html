@@ -9,6 +9,11 @@
         </mat-card-header>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <mat-card-content>
+          @if(sameData()){
+            <div class="alert alert-danger" role="alert">
+              El plan y el periodo son los mismos que tiene actualmente
+            </div>
+          }
           @if(alreadyExistUpdate){
             <div class="alert alert-info" role="alert">
               Ya existe una actualización en curso <br>

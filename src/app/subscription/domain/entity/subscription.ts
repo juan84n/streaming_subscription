@@ -19,7 +19,7 @@ export class Subscription {
     public startDate: Date,
   ){
     this.id = new UUIDValue(crypto.randomUUID());
-    this.startDate = new Date();
+    this.startDate =  startDate;
     this.price = plan.calculatePrice(period);
     this.endDate = this.calculateEndDate(startDate, period);
     this.isActive = true;

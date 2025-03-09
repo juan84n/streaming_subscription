@@ -1,5 +1,5 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -20,7 +20,8 @@ import { UserLoggedInService } from '@subscription/infrastructure/services/user-
   imports: [MatFormFieldModule, MatInputModule, MatSelectModule, RouterLink,
     ReactiveFormsModule, CommonModule, MatButtonModule, MatCardModule, MatIconModule, DatePipe],
   templateUrl: './update-subscription.component.html',
-  styleUrl: './update-subscription.component.scss'
+  styleUrl: './update-subscription.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UpdateSubscriptionComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -31,6 +32,7 @@ export class UpdateSubscriptionComponent implements OnInit {
 
   public currentSubscription: Subscription | undefined;
   public plans = inject(PlansRepositoryService);
+  public sameData = signal(false);
   public alreadyExistUpdate = false;
   public form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -48,18 +50,19 @@ export class UpdateSubscriptionComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
       const type = this.form.value.type ?? '';
       const period = this.form.value.period ?? 1;
       const plan = this.plans.findAllPlans().find(plan => plan.name === type) ??
       new Plan('1', 'basico', 'Básico', { value: 10 }, { value: 100 });
-      //const user = this.currentSubscription?.user ?? new User('', '', '')
-      //const subscription = new Subscription(plan, user, +period, new Date());
       if(this.currentSubscription){
-        this.currentSubscription.update(plan, +period, new Date());
-        this.updateUseCase.update(this.currentSubscription);
-        //this.userLoggedIn.setSubscription(subscription);
-        this.router.navigate(['/subscription/view-subscription']);
+        if(this.currentSubscription.plan.name !== plan.name || this.currentSubscription.period !== +period){
+          this.currentSubscription.update(plan, +period, new Date());
+          this.updateUseCase.update(this.currentSubscription);
+          //this.userLoggedIn.setSubscription(subscription);
+          this.router.navigate(['/subscription/view-subscription']);
+        }else {
+          this.sameData.set(true);
+        }
       }
     }
   }
