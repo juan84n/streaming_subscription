@@ -1,0 +1,54 @@
+<div class="container text-center mt-4">
+  <div class="row">
+    <div class="col rounded-3">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>
+            <p class="fw-bold">Suscripción Mensual</p>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="fs-5 text-start">Características</p>
+          <p class="text-start">
+
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <!--<button mat-button>Básico</button>
+                    <button mat-button>Estándar</button>
+          <button mat-button>Premium</button>
+          -->
+          <a mat-raised-button class="ms-2" [routerLink]="['/subscription/create']" [queryParams]="{type: 'basico', period: 1}">Básico</a>
+          <a mat-raised-button class="ms-2" [routerLink]="['/subscription/create']" [queryParams]="{type: 'estandar', period: 1}">Estándar</a>
+          <a mat-raised-button class="ms-2" [routerLink]="['/subscription/create']" [queryParams]="{type: 'premium', period: 1}">Premium</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="col-1">
+    </div>
+    <div class="col rounded-3">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>
+            <p class="fw-bold">Suscripción Anual</p>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="fs-5 text-start">Características</p>
+          <p class="text-start">
+            Juegos móviles, series y películas; sin publicidad y sin límite
+            Puedes ver contenido en 4 dispositivos compatibles a la vez
+            Reproducción en 4K (Ultra HD) + HDR
+            Puedes descargar contenido en 6 dispositivos compatibles a la vez
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-raised-button class="ms-2" [routerLink]="['/subscription/create']" [queryParams]="{type: 'basico', period: 12}">Básico</a>
+          <a mat-raised-button class="ms-2" [routerLink]="['/subscription/create']" [queryParams]="{type: 'estandar', period: 12}">Estándar</a>
+          <a mat-raised-button class="ms-2" [routerLink]="['/subscription/create']" [queryParams]="{type: 'premium', period: 12}">Premium</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

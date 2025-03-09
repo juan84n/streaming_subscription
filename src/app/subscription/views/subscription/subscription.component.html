@@ -1,0 +1,59 @@
+<div class="container text-center mt-4">
+  <div class="row">
+    <div class="col rounded-3">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>
+            <p class="fw-bold">{{title}}</p>
+            </mat-card-title>
+        </mat-card-header>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-card-content>
+          <mat-form-field>
+            <mat-label>Enter your Name</mat-label>
+            <input matInput type="text" formControlName="name" />
+          </mat-form-field>
+          <br>
+          @if(emailExist()){
+            <div class="alert alert-danger" role="alert">
+              Este email ya tiene una suscripción
+            </div>
+          }
+          <mat-form-field>
+            <mat-label>Enter your email</mat-label>
+            <input matInput type="email" formControlName="email" />
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+              <mat-label>Enter your password</mat-label>
+              <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
+              <button
+                type="button"
+                mat-icon-button
+                matSuffix
+                (click)="hidePassword($event)"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide()"
+              >
+                <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+              <mat-label>Tipo de membresia</mat-label>
+              <select formControlName="type" matNativeControl required>
+                <option value="basico">Básico</option>
+                <option value="estandar">Estándar</option>
+                <option value="premium">Premium</option>
+              </select>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button [disabled]="this.form.invalid">Crear Suscripción</button>
+          <a mat-flat-button class="ms-2" [routerLink]="['/']">Cancelar</a>
+        </mat-card-actions>
+      </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

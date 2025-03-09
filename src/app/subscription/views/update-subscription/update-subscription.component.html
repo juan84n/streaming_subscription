@@ -1,0 +1,54 @@
+<div class="container text-center mt-4">
+  <div class="row">
+    <div class="col rounded-3">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>
+            <p class="fw-bold">Actualizar subscripción</p>
+            </mat-card-title>
+        </mat-card-header>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-card-content>
+          @if(alreadyExistUpdate){
+            <div class="alert alert-info" role="alert">
+              Ya existe una actualización en curso <br>
+              En la próxima fecha {{currentSubscription?.nextSubscription?.startDate | date:"EEEE, d MMM y"}} se inicia el nuevo plan <br>
+              Plan: {{currentSubscription?.nextSubscription?.plan?.label}} <br>
+              Precio: {{currentSubscription?.nextSubscription?.price?.value}} <br>
+              Tiene un reembolso de: {{currentSubscription?.nextSubscription?.refund?.value}}
+            </div>
+          } @else {
+            <mat-form-field>
+              <mat-label>Enter your email</mat-label>
+              <input matInput type="email" formControlName="email" />
+            </mat-form-field>
+              <br/>
+              <mat-form-field>
+                <mat-label>Periodo</mat-label>
+                <select formControlName="period" matNativeControl required>
+                  <option value="1">Mensual</option>
+                  <option value="12">Anual</option>
+                </select>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <mat-label>Tipo de membresia</mat-label>
+                <select formControlName="type" matNativeControl required>
+                  <option value="basico">Básico</option>
+                  <option value="estandar">Estándar</option>
+                  <option value="premium">Premium</option>
+                </select>
+              </mat-form-field>
+          }
+        </mat-card-content>
+        <mat-card-actions>
+          @if(!alreadyExistUpdate){
+          <button mat-raised-button [disabled]="this.form.invalid">Actualizar Subscripción</button>
+          }
+          <a mat-flat-button class="ms-2" [routerLink]="['/subscription/view-subscription']">Cancelar</a>
+        </mat-card-actions>
+      </form>
+      </mat-card>
+    </div>
+  </div>
+</div>

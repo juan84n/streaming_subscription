@@ -1,0 +1,74 @@
+<app-nav/>
+<div class="container text-center mt-4">
+  <div class="row">
+    <div class="col rounded-3">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title><p class="fw-bold">Listado de suscripciones</p></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="container text-center">
+            <div class="row fw-bold">
+              <div class="col">
+                Email del usuario
+              </div>
+              <div class="col">
+                Plan
+              </div>
+              <div class="col-sm">
+                Precio
+              </div>
+              <div class="col-sm">
+                Periodo
+              </div>
+              <div class="col-sm">
+                Esta activo
+              </div>
+              <div class="col">
+                Fecha de inicio
+              </div>
+              <div class="col">
+                Fecha de fin
+              </div>
+              <div class="col-sm">
+                Valor reembolso
+              </div>
+            </div>
+            @for (subscription of listSubscriptions; track subscription.id) {
+            <div class="row">
+              <div class="col">
+                {{subscription?.user?.email}}
+              </div>
+              <div class="col">
+                {{subscription?.plan?.label}}
+              </div>
+              <div class="col">
+                {{subscription?.price?.value}}
+              </div>
+              <div class="col">
+                {{subscription?.period === 1 ? 'Mensual' : 'Anual'}}
+              </div>
+              <div class="col">
+                <mat-icon>{{subscription?.isActive ? 'check_small' : 'cancel'}}</mat-icon>
+              </div>
+              <div class="col">
+                {{subscription?.startDate | date:"EEEE, d MMM y"}}
+              </div>
+              <div class="col">
+                {{subscription?.endDate | date:"EEEE, d MMM y"}}
+              </div>
+              <div class="col">
+                {{subscription?.refund?.value}}
+              </div>
+            </div>
+          }
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-raised-button class="ms-2" [routerLink]="['/']">Volver</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
