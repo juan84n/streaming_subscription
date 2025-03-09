@@ -1,12 +1,12 @@
 # StreamingSubscription
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.1.
-
 ## Development server
 
+Se debe tener **node 20**
 Para levantarlo en local se debe ejecutar:
 
 ```bash
+npm install
 npm start
 ```
 
