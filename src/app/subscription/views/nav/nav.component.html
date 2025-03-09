@@ -1,6 +1,6 @@
 <nav class="navbar bg-body-tertiary">
   <form class="container-fluid justify-content-start">
-    <!--<button class="btn btn-primary me-2" type="button">Iniciar Sesión</button>-->
+    <a mat-raised-button class="ms-2" [routerLink]="['/subscription/list-subscriptions']">Listado de suscripciones</a>
     @if(!this.userLoggedIn.isLoggedIn()){
       <a mat-raised-button class="ms-2" [routerLink]="['/login']">Iniciar Sesión</a>
     }
@@ -8,6 +8,5 @@
       <a mat-raised-button class="ms-2" [routerLink]="['/subscription/view-subscription']">Verificar suscripción</a>
       <a mat-raised-button class="ms-2" (click)="logout()">Cerrar Sesión</a>
     }
-    <a mat-raised-button class="ms-2" [routerLink]="['/subscription/list-subscriptions']">Listado de suscripciones</a>
   </form>
 </nav>

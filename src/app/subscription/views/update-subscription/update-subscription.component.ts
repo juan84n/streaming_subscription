@@ -53,11 +53,14 @@ export class UpdateSubscriptionComponent implements OnInit {
       const period = this.form.value.period ?? 1;
       const plan = this.plans.findAllPlans().find(plan => plan.name === type) ??
       new Plan('1', 'basico', 'Básico', { value: 10 }, { value: 100 });
-      const user = this.currentSubscription?.user ?? new User('', '', '')
-      const subscription = new Subscription(plan, user, +period, new Date());
-      this.currentSubscription?.update(subscription);
-      this.updateUseCase.update(subscription);
-      this.router.navigate(['/subscription/view-subscription']);
+      //const user = this.currentSubscription?.user ?? new User('', '', '')
+      //const subscription = new Subscription(plan, user, +period, new Date());
+      if(this.currentSubscription){
+        this.currentSubscription.update(plan, +period, new Date());
+        this.updateUseCase.update(this.currentSubscription);
+        //this.userLoggedIn.setSubscription(subscription);
+        this.router.navigate(['/subscription/view-subscription']);
+      }
     }
   }
 }

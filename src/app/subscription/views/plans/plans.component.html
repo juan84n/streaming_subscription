@@ -10,14 +10,15 @@
         <mat-card-content>
           <p class="fs-5 text-start">Características</p>
           <p class="text-start">
-
+            Tenemos los siguientes planes Mensuales: <br>
           </p>
+          <ul class="list-group">
+            @for (plan of plansList; track plan.id) {
+              <li class="list-group-item"><b>Plan: </b> {{plan.label}} ${{plan.monthlyPrice.value}}</li>
+            }
+          </ul>
         </mat-card-content>
         <mat-card-actions>
-          <!--<button mat-button>Básico</button>
-                    <button mat-button>Estándar</button>
-          <button mat-button>Premium</button>
-          -->
           <a mat-raised-button class="ms-2" [routerLink]="['/subscription/create']" [queryParams]="{type: 'basico', period: 1}">Básico</a>
           <a mat-raised-button class="ms-2" [routerLink]="['/subscription/create']" [queryParams]="{type: 'estandar', period: 1}">Estándar</a>
           <a mat-raised-button class="ms-2" [routerLink]="['/subscription/create']" [queryParams]="{type: 'premium', period: 1}">Premium</a>
@@ -36,11 +37,13 @@
         <mat-card-content>
           <p class="fs-5 text-start">Características</p>
           <p class="text-start">
-            Juegos móviles, series y películas; sin publicidad y sin límite
-            Puedes ver contenido en 4 dispositivos compatibles a la vez
-            Reproducción en 4K (Ultra HD) + HDR
-            Puedes descargar contenido en 6 dispositivos compatibles a la vez
+            Tenemos los siguientes planes Anuales: <br>
           </p>
+          <ul class="list-group">
+            @for (plan of plansList; track plan.id) {
+              <li class="list-group-item"><b>Plan: </b> {{plan.label}} $<s>{{plan.anualPrice.value}}</s> ${{plan.calculatePrice(12).value}}</li>
+            }
+          </ul>
         </mat-card-content>
         <mat-card-actions>
           <a mat-raised-button class="ms-2" [routerLink]="['/subscription/create']" [queryParams]="{type: 'basico', period: 12}">Básico</a>

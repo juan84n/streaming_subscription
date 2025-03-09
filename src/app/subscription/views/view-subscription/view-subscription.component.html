@@ -20,6 +20,14 @@
             <br/>
             Fecha de fin: {{subscription?.endDate | date:"EEEE, d MMM y"}}
           </p>
+          @if(subscription?.nextSubscription){
+            <div class="alert alert-info text-start" role="alert">
+              En la próxima fecha {{subscription?.nextSubscription?.startDate | date:"EEEE, d MMM y"}} se inicia el nuevo plan <br>
+              Plan: {{subscription?.nextSubscription?.plan?.label}} <br>
+              Precio: {{subscription?.nextSubscription?.price?.value}} <br>
+              Tiene un reembolso de: {{subscription?.nextSubscription?.refund?.value}}
+            </div>
+          }
         </mat-card-content>
         <mat-card-actions>
           <a mat-raised-button class="ms-2" [routerLink]="['/subscription/update']">Cambiar plan Suscripción</a>

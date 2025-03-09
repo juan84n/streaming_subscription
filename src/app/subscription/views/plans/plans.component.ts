@@ -15,7 +15,9 @@ export class PlansComponent implements OnInit {
 
   private router = inject(Router);
   private userLoggedIn = inject(UserLoggedInService);
-  public plans = inject(PlansRepositoryService);
+  private plans = inject(PlansRepositoryService);
+
+  public plansList = this.plans.findAllPlans();
 
   ngOnInit(): void {
     const subscriptions = this.userLoggedIn.getSubscription()

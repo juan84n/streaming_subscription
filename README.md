@@ -4,56 +4,47 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## Development server
 
-To start a local development server, run:
+Para levantarlo en local se debe ejecutar:
 
 ```bash
-ng serve
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Navegar a `http://localhost:4200/`. 
 
-## Code scaffolding
+## Recursos adicionales
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Fue usada la versión 19 de Angular en la cuál no se usan modulos sino componentes standalone para facilidades.
 
-```bash
-ng generate component component-name
-```
+Se utilizó arquitectura hexagonal con DDD, en la cual encontramos las siguientes capas:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**Application**: Se encuentra la implementación de los casos de uso cuyas abstracciones fueron definidas en el dominio. Los casos de uso suelen usar el patrón facade donde se abstrae la implementación y cada caso de uso es creado con el concepto de servicio de angular para usar el injectable y poder ser injectados en las vistas; estos servicios son singleton.
 
-```bash
-ng generate --help
-```
+**Domain**: Se encuentran las entidades de dominio, los objetos de valor y las abstracciones de los casos de uso y del repositorio. En el dominio encontramos la lógica de negocio de la suscripción. Este dominio esta limpio de angular, ninguna anotación implementación o algo que tenga que ver con el framework. Las abstracciones de caso de uso se segregaron en interfaces donde se verifica que ningún caso de uso tiene que ver con el otro (cancelar, actualizar, suscribir, etc)
 
-## Building
+**Infrastructure**: Implementa las abstracciones de los repositorios del dominio, en este caso para simular un store de bbdd en memoria, pero se podría implementar cualquier otro tipo de bbdd
 
-To build the project run:
+**Views**: Son los componentes de angular para interactuar con el navegador.
 
-```bash
-ng build
-```
+Se ha diseñado un inicio de sesión para darle un toque mas realista
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Reglas de negocio
+**Descuento para plan anual**
+Se hace el calculo del 10% cuando se elige un plan anual (dentro de subscription.ts)
 
-## Running unit tests
+**Actualización de plan**
+Cuando se hace un cambio de plan dependiendo la fecha se pone para el siguiente período; este objeto es nextSubscription dentro de suscription y se hace un calculo para verificar si hay o no reembolso dependiendo del plan.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+**Cancelación**
+Cuando se cancela un plan se hace un calculo considerando la fecha actual y la fecha final del plan, se mira el valor por día y la diferencia de días si existe se da como reembolso; esto es tanto para mensuales como para anuales.
 
-```bash
-ng test
-```
+No se puede crear una nueva suscripción si ya tiene una activa para el mismo usuario (email)
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Capturas
+![Home](images/readme/home.png)
+![Subscription](images/readme/subscription.PNG)
+![Login](images/readme/login.PNG)
+![Subscription List](images/readme/subscription_list.PNG)
+![update](images/readme/update.PNG)
+![check](images/readme/check.PNG)
+![cancel](images/readme/cancel.PNG)
