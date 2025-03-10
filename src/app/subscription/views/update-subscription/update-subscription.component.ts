@@ -37,7 +37,6 @@ export class UpdateSubscriptionComponent implements OnInit {
   public form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       type: ['', [Validators.required]],
-      period: ['', [Validators.required]],
   });
 
   ngOnInit(): void {
@@ -51,14 +50,13 @@ export class UpdateSubscriptionComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       const type = this.form.value.type ?? '';
-      const period = this.form.value.period ?? 1;
       const plan = this.plans.findAllPlans().find(plan => plan.name === type) ??
       new Plan('1', 'basico', 'Básico', { value: 10 }, { value: 100 });
       if(this.currentSubscription){
-        if(this.currentSubscription.plan.name !== plan.name || this.currentSubscription.period !== +period){
-          this.currentSubscription.update(plan, +period, new Date());
+        if(this.currentSubscription.plan.name !== plan.name){
+          this.currentSubscription.update(plan, new Date());
           this.updateUseCase.update(this.currentSubscription);
-          //this.userLoggedIn.setSubscription(subscription);
+          this.userLoggedIn.setSubscription(this.currentSubscription);
           this.router.navigate(['/subscription/view-subscription']);
         }else {
           this.sameData.set(true);

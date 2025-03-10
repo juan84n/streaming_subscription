@@ -33,7 +33,7 @@ Se ha diseñado un inicio de sesión para darle un toque mas realista
 Se hace el calculo del 10% cuando se elige un plan anual (dentro de subscription.ts)
 
 **Actualización de plan**
-Cuando se hace un cambio de plan dependiendo la fecha se pone para el siguiente período; este objeto es nextSubscription dentro de suscription y se hace un calculo para verificar si hay o no reembolso dependiendo del plan.
+Cuando se hace un cambio de plan dependiendo la fecha se pone para el siguiente período; este objeto es nextSubscription dentro de suscription y se hace un calculo para verificar si hay o no reembolso dependiendo del plan. Solo se puede actualizar el plan para mayor facilidad.
 
 **Cancelación**
 Cuando se cancela un plan se hace un calculo considerando la fecha actual y la fecha final del plan, se mira el valor por día y la diferencia de días si existe se da como reembolso; esto es tanto para mensuales como para anuales.
@@ -44,6 +44,22 @@ No se puede crear una nueva suscripción si ya tiene una activa para el mismo us
 Como es una aplicación pequeña se usaron las nuevas señales que son poderosas y funcionan como obervables, de esa manera podemos cambiar la estrategia de cambio para evitar el onzone de angular y usar el push.
 
 Para desacoplar la capa de application con la de infrastructure y no inyectar la dependencia de la implementación del repositorio en los casos de uso se optó por crear una carpeta config a la par de las arquitectónicas donde se creo un token inyectable que a su vez se inicia en el componente standalone principal de la aplicación y así se puede inyectar la implementación para la abstracción del repositorio del dominio.
+
+Se han creado planes harcoded en el repositorio de planes, donde los precios en mensual son:
+
+* Plan Básico $10
+* Plan Estándar $15
+* Plan Premium $20
+
+Y para anual serían:
+
+* Plan Básico $120
+* Plan Estándar $180
+* Plan Premium $240
+
+A estos últimos se les aplicaría el descuento del 10%
+
+
 
 Por el tiempo no se han implementado pruebas unitarias
 

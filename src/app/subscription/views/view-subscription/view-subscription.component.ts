@@ -22,10 +22,13 @@ export class ViewSubscriptionComponent implements OnInit {
   private router = inject(Router);
 
   public subscription: Subscription | undefined = this.userLoggedIn.getSubscription();
+  public existRefund = false;
 
   ngOnInit(): void {
     if(!this.subscription) {
       this.router.navigate(['/']);
+    } else {
+      this.existRefund = this.subscription.refund.value > 0;
     }
   }
 

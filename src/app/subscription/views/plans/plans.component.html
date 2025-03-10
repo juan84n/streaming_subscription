@@ -14,7 +14,7 @@
           </p>
           <ul class="list-group">
             @for (plan of plansList; track plan.id) {
-              <li class="list-group-item"><b>Plan: </b> {{plan.label}} ${{plan.monthlyPrice.value}}</li>
+              <li class="list-group-item"><b>Plan {{plan.label}} </b> ${{plan.monthlyPrice.value}}</li>
             }
           </ul>
         </mat-card-content>
@@ -41,7 +41,7 @@
           </p>
           <ul class="list-group">
             @for (plan of plansList; track plan.id) {
-              <li class="list-group-item"><b>Plan: </b> {{plan.label}} $<s>{{plan.anualPrice.value}}</s> ${{plan.calculatePrice(12).value}}</li>
+              <li class="list-group-item"><b>Plan {{plan.label}}</b> $<s>{{plan.anualPrice.value}}</s> ${{plan.calculatePrice(12).value}}</li>
             }
           </ul>
         </mat-card-content>

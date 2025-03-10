@@ -70,19 +70,20 @@ export class Subscription {
     return diffMiliseconds;
   }
 
-  update(plan: Plan, period: Period, startDate: Date){
-    if(this.period === Period.Anual){
-      const totalRefund = this.price.value - this.price.value;
-      this.refund = new Price(this.refund.value + totalRefund);
+  private calculateRefund(nextPrice: Price){
+    const totalRefund = this.price.value - nextPrice.value;
+    return new Price(this.refund.value + (totalRefund < 0 ? 0 : totalRefund));
+  }
+
+  update(plan: Plan, startDate: Date){
+    const nextPrice = plan.calculatePrice(this.period);
+    if(this.period === Period.Monthly && this.compareDates(this.endDate, startDate)){
+      const refund = this.calculateRefund(nextPrice);
+      this.nextSubscription = { ...this, startDate: this.endDate, price: nextPrice, isActive: false, refund }
     } else {
-      if(this.compareDates(this.endDate, startDate)){
-        this.nextSubscription = new Subscription(plan, this.user, period, this.endDate);
-        this.nextSubscription.isActive = false;
-      } else {
-        this.plan = plan;
-        this.price = plan.calculatePrice(period);
-        this.period = period;
-      }
+      this.refund = this.calculateRefund(nextPrice);
+      this.plan = plan;
+      this.price = nextPrice;
     }
   }
 
