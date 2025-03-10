@@ -7,11 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UpdateImplUseCase } from '@subscription/application/update/usecase';
 import { Plan } from '@subscription/domain/entity/plan';
 import { Subscription } from '@subscription/domain/entity/subscription';
-import { User } from '@subscription/domain/entity/user';
 import { PlansRepositoryService } from '@subscription/infrastructure/repository/plans-repository.service';
 import { UserLoggedInService } from '@subscription/infrastructure/services/user-logged-in.service';
 

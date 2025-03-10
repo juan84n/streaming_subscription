@@ -38,21 +38,18 @@ export class LoginComponent {
     event.stopPropagation();
   }
 
-    onSubmit() {
-      if (this.form.valid) {
-          const email = this.form.value.email ?? ''
-          const password = this.form.value.password ?? '';
-
-          const subscription = this.subscriptionRepository.findByUserEmailAndPassword(email, password);
-
-          if(subscription){
-            this.userLoggedIn.setLoggedIn(true);
-            this.userLoggedIn.setSubscription(subscription);
-            this.router.navigate(['/subscription/view-subscription']);
-          } else {
-            this.exist.set(false);
-          }
-
+  onSubmit() {
+    if (this.form.valid) {
+        const email = this.form.value.email ?? ''
+        const password = this.form.value.password ?? '';
+        const subscription = this.subscriptionRepository.findByUserEmailAndPassword(email, password);
+        if(subscription){
+          this.userLoggedIn.setLoggedIn(true);
+          this.userLoggedIn.setSubscription(subscription);
+          this.router.navigate(['/subscription/view-subscription']);
+        } else {
+          this.exist.set(false);
+        }
       }
-    }
+  }
 }
